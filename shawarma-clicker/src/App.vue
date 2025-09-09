@@ -6,6 +6,14 @@
   <router-view />
 </template>
 
+<script>
+export default {
+  mounted() {
+    this.$store.dispatch("incrementPerSecond");
+  },
+};
+</script>
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -25,6 +33,6 @@ nav a {
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  color: #c5d43e;
 }
 </style>
