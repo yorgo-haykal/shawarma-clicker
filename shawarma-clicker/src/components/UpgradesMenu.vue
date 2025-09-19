@@ -2,39 +2,26 @@
   <h2>Upgrades</h2>
   <ul>
     <li>
-      <img
-        class="upgrade-icon"
-        :class="{ disabled: $store.state.score < $store.state.skewerCost }"
-        @click="$store.commit('addUpgrade', 'skewer')"
-        src="@/assets/skewer.png"
-      />
-      <p>Skewers</p>
-      <p>(Owned: {{ $store.getters.skewers }})</p>
+      <upgrade-component upgrade="skewer" />
     </li>
     <li>
-      <img
-        class="upgrade-icon"
-        :class="{ disabled: $store.state.score < $store.state.chefCost }"
-        @click="$store.commit('addUpgrade', 'chef')"
-        src="@/assets/chef.png"
-      />
-      <p>Chefs</p>
-      <p>(Owned: {{ $store.getters.chefs }})</p>
+      <upgrade-component upgrade="chef" />
     </li>
     <li>
-      <img
-        class="upgrade-icon"
-        :class="{ disabled: $store.state.score < $store.state.branchCost }"
-        @click="$store.commit('addUpgrade', 'branch')"
-        src="@/assets/restaurant.png"
-      />
-      <p>Branches</p>
-      <p>(Owned: {{ $store.getters.branches }})</p>
+      <upgrade-component upgrade="branch" />
     </li>
   </ul>
 </template>
 
-<script></script>
+<script>
+import UpgradeComponent from "./UpgradeComponent.vue";
+
+export default {
+  components: {
+    UpgradeComponent,
+  },
+};
+</script>
 
 <style>
 .upgrade-icon {
@@ -51,5 +38,6 @@ li {
   display: flex;
   align-items: center;
   background-color: dimgray;
+  gap: 5px;
 }
 </style>

@@ -9,7 +9,7 @@ export default createStore({
     skewerCost: 100,
     chefs: 0,
     chefCost: 200,
-    branches: 0,
+    branchs: 0,
     branchCost: 300,
   },
   getters: {
@@ -19,7 +19,7 @@ export default createStore({
     skewerCost: (state) => state.skewerCost,
     chefs: (state) => state.chefs,
     chefCost: (state) => state.chefCost,
-    branches: (state) => state.branches,
+    branchs: (state) => state.branchs,
     branchCost: (state) => state.branchCost,
   },
   mutations: {
@@ -46,7 +46,7 @@ export default createStore({
           break;
         case "branch":
           if (state.score >= state.branchCost) {
-            state.branches += 1;
+            state.branchs += 1;
             state.branchCost *= 1.15;
             state.scorePerSecond += 5;
             state.score -= 300;
