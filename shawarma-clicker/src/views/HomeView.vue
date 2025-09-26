@@ -7,18 +7,23 @@
       <h2>{{ $store.getters.score }} shawarmas</h2>
       <ShawarmaButton />
     </main>
+    <aside id="achievments-menu">
+      <AchievementsMenu />
+    </aside>
   </div>
 </template>
 
 <script>
 import ShawarmaButton from "@/components/ShawarmaButton.vue";
 import UpgradesMenu from "@/components/UpgradesMenu.vue";
+import AchievementsMenu from "@/components/AchievementsMenu.vue";
 
 export default {
   name: "HomeView",
   components: {
     ShawarmaButton,
     UpgradesMenu,
+    AchievementsMenu,
   },
 };
 </script>
@@ -40,5 +45,11 @@ main {
   color: black;
   padding: 20px;
   border-left: 1px solid #ccc;
+}
+
+#achievements-menu {
+  width: 250px;
+  color: #ccd848;
+  padding: 20px;
 }
 </style>
