@@ -15,6 +15,7 @@ export default createStore({
   getters: {
     score: (state) => state.score,
     scorePerClick: (state) => state.scorePerClick,
+    scorePerSecond: (state) => state.scorePerSecond,
     skewers: (state) => state.skewers,
     skewerCost: (state) => state.skewerCost,
     chefs: (state) => state.chefs,
@@ -31,7 +32,7 @@ export default createStore({
         case "skewer":
           if (state.score >= state.skewerCost) {
             state.skewers += 1;
-            state.skewerCost *= 1.15;
+            state.skewerCost = Math.round(state.skewerCost * 1.15);
             state.scorePerSecond += 1;
             state.score -= 100;
           }
@@ -39,7 +40,7 @@ export default createStore({
         case "chef":
           if (state.score >= state.chefCost) {
             state.chefs += 1;
-            state.chefCost *= 1.15;
+            state.chefCost = Math.round(state.chefCost * 1.15);
             state.scorePerSecond += 3;
             state.score -= 200;
           }
@@ -47,11 +48,15 @@ export default createStore({
         case "branch":
           if (state.score >= state.branchCost) {
             state.branchs += 1;
-            state.branchCost *= 1.15;
+            state.branchCost = Math.round(state.branchCost * 1.15);
             state.scorePerSecond += 5;
             state.score -= 300;
           }
           break;
+        case "garlic":
+          if (state.score > 100) {
+            state.scorePerClick += 1;
+          }
       }
     },
   },

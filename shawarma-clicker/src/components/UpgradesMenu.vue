@@ -1,4 +1,5 @@
 <template>
+  <h2>{{ $store.getters.scorePerSecond }} shawarmas/s</h2>
   <h2>Upgrades</h2>
   <ul>
     <li>
@@ -34,10 +35,17 @@ export default {
   opacity: 0.6;
 }
 
+ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 li {
   display: flex;
-  align-items: center;
-  background-color: dimgray;
-  gap: 5px;
+  align-items: baseline;
+  margin-bottom: 10px;
 }
 </style>
