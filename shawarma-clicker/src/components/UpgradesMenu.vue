@@ -11,6 +11,9 @@
     <li>
       <upgrade-component upgrade="branch" />
     </li>
+    <li>
+      <upgrade-component upgrade="garlic" />
+    </li>
   </ul>
 </template>
 

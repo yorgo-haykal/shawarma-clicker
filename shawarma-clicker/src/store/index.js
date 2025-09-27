@@ -1,4 +1,49 @@
 import { createStore } from "vuex";
+const DEFAULT_STATE = {
+  score: 0,
+  scorePerClick: 1,
+  scorePerSecond: 0,
+  skewers: 0,
+  skewerCost: 100,
+  chefs: 0,
+  chefCost: 200,
+  branchs: 0,
+  branchCost: 300,
+  garlics: 0,
+  garlicCost: 500,
+  unlockedAchievements: [],
+};
+function saveState(state) {
+  localStorage.setItem(
+    "shawarma-clicker-state",
+    JSON.stringify({
+      score: state.score,
+      scorePerClick: state.scorePerClick,
+      scorePerSecond: state.scorePerSecond,
+      skewers: state.skewers,
+      skewerCost: state.skewerCost,
+      chefs: state.chefs,
+      chefCost: state.chefCost,
+      branchs: state.branchs,
+      branchCost: state.branchCost,
+      garlics: state.garlics,
+      garlicCost: state.garlicCost,
+      unlockedAchievements: state.unlockedAchievements,
+    })
+  );
+}
+
+function loadState() {
+  const saved = localStorage.getItem("shawarma-clicker-state");
+  if (saved) {
+    try {
+      return JSON.parse(saved);
+    } catch (e) {
+      console.warn("Failed to parse saved state, using defaults.");
+    }
+  }
+  return DEFAULT_STATE;
+}
 
 const ACHIEVEMENTS = [
   {
@@ -37,24 +82,13 @@ function checkAchievements(state) {
   for (const a of ACHIEVEMENTS) {
     if (!state.unlockedAchievements.includes(a.id) && a.condition(state)) {
       state.unlockedAchievements.push(a.id);
-      alert(a.title);
+      alert("Achievement Unlocked!\n" + a.title);
     }
   }
 }
 
 export default createStore({
-  state: {
-    score: 0,
-    scorePerClick: 1,
-    scorePerSecond: 0,
-    skewers: 0,
-    skewerCost: 100,
-    chefs: 0,
-    chefCost: 200,
-    branchs: 0,
-    branchCost: 300,
-    unlockedAchievements: [],
-  },
+  state: loadState(),
   getters: {
     score: (state) => state.score,
     scorePerClick: (state) => state.scorePerClick,
@@ -65,6 +99,8 @@ export default createStore({
     chefCost: (state) => state.chefCost,
     branchs: (state) => state.branchs,
     branchCost: (state) => state.branchCost,
+    garlics: (state) => state.garlics,
+    garlicCost: (state) => state.garlicCost,
     achievementsAll: () => ACHIEVEMENTS,
     achievementsUnlocked: (state) => state.unlockedAchievements,
   },
@@ -72,40 +108,49 @@ export default createStore({
     increment(state, amount) {
       state.score += amount;
       checkAchievements(state);
+      saveState(state);
     },
     addUpgrade(state, upgrade) {
       switch (upgrade) {
         case "skewer":
           if (state.score >= state.skewerCost) {
             state.skewers += 1;
+            state.score -= state.skewerCost;
             state.skewerCost = Math.round(state.skewerCost * 1.15);
             state.scorePerSecond += 1;
-            state.score -= 100;
           }
           break;
         case "chef":
           if (state.score >= state.chefCost) {
             state.chefs += 1;
+            state.score -= state.chefCost;
             state.chefCost = Math.round(state.chefCost * 1.15);
             state.scorePerSecond += 3;
-            state.score -= 200;
           }
           break;
         case "branch":
           if (state.score >= state.branchCost) {
             state.branchs += 1;
+            state.score -= state.branchCost;
             state.branchCost = Math.round(state.branchCost * 1.15);
             state.scorePerSecond += 5;
-            state.score -= 300;
           }
           break;
         case "garlic":
-          if (state.score > 100) {
-            state.scorePerClick += 1;
+          if (state.score > state.garlicCost) {
+            state.garlics += 1;
+            state.scorePerSecond *= 2;
+            state.score -= state.garlicCost;
+            state.garlicCost *= 2;
           }
           break;
       }
       checkAchievements(state);
+      saveState(state);
+    },
+    resetProgress(state) {
+      Object.assign(state, { ...DEFAULT_STATE });
+      localStorage.setItem("shawarma-clicker-state", JSON.stringify(state));
     },
   },
   actions: {

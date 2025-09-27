@@ -4,6 +4,7 @@
       <UpgradesMenu />
     </aside>
     <main>
+      <button @click="$store.commit('resetProgress')">Reset progress</button>
       <h2>{{ $store.getters.score }} shawarmas</h2>
       <ShawarmaButton />
     </main>
@@ -37,6 +38,23 @@ export default {
 
 main {
   flex: 1;
+}
+
+button {
+  background-color: #ccd848;
+  color: black;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+button:hover {
+  background-color: #d9534f;
 }
 
 #upgrade-menu {
