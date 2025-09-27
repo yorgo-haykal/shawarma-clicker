@@ -91,6 +91,7 @@ export default {
   height: 75px;
   gap: 8px;
   cursor: pointer;
+  border-radius: 10%;
 }
 
 .tooltip-text {

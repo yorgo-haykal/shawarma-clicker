@@ -22,11 +22,11 @@ export default {
 
 <style>
 .shawarma {
-  height: 200px;
+  height: 300px;
   width: auto;
 }
 
 .shawarma:active {
-  transform: translateY(4px);
+  transform: translateY(10px);
 }
 </style>
