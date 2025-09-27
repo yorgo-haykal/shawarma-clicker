@@ -12,6 +12,11 @@ const ACHIEVEMENTS = [
     condition: (s) => s.score >= 100,
   },
   {
+    id: "thousand",
+    title: "Shawarmanji",
+    condition: (s) => s.score >= 1000,
+  },
+  {
     id: "first_skewer",
     title: "First Skewer",
     condition: (s) => s.skewers >= 1,

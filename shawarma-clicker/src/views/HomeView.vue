@@ -7,7 +7,7 @@
       <h2>{{ $store.getters.score }} shawarmas</h2>
       <ShawarmaButton />
     </main>
-    <aside id="achievments-menu">
+    <aside id="achievements-menu">
       <AchievementsMenu />
     </aside>
   </div>
@@ -49,7 +49,8 @@ main {
 
 #achievements-menu {
   width: 250px;
-  color: #ccd848;
+  background-color: #ccd848;
+  color: black;
   padding: 20px;
 }
 </style>
