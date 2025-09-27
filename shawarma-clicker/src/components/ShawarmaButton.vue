@@ -22,7 +22,7 @@ export default {
 
 <style>
 .shawarma {
-  height: 150px;
+  height: 200px;
   width: auto;
 }
 
